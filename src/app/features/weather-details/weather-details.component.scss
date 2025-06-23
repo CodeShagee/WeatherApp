@@ -1,0 +1,183 @@
+// Weather Details Component Styles - Unified & Modern
+.weather-details {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  padding: 2rem;
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--color-gray-900);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.weather-details--sunny { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+.weather-details--cloudy { background: linear-gradient(135deg, #dbe6e4 0%, #b8c6db 100%); }
+.weather-details--rainy { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+.weather-details--snowy { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
+.weather-details--stormy { background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #fff; }
+.weather-details--default { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+
+.weather-details__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.details__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.details__subtitle {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.weather-details__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.details__section {
+  background: rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.section__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-primary-dark);
+}
+.section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.detail-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  min-height: 70px;
+}
+.detail-card__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.detail-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.detail-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.detail-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+// Condition Display
+.condition__display {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.condition__icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.weather-icon {
+  width: 64px;
+  height: 64px;
+}
+.condition__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.condition__text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.condition__code {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+// Footer
+.weather-details__footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+// Loading State
+.weather-details--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--color-gray-900);
+}
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive
+@media (max-width: 900px) {
+  .weather-details {
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 600px) {
+  .weather-details {
+    padding: 0.5rem;
+  }
+  .section__grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .condition__display {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+} 

@@ -1,12 +1,64 @@
-
-<div *ngIf="currentWeather" class="weather-card">
-    <h2>Weather in {{ currentWeather.location.name }}</h2>
-    <p>Temperature: {{ currentWeather.current.temp_c }} °C</p>
-    <p>Condition: {{ currentWeather.current.condition.text }}</p> 
-    <img [src]="currentWeather.current.condition.icon" alt="Weather Icon">
-    <p>Feels Like: {{ currentWeather.current.feelslike_c }} °C</p>
-    <p>Last Updated: {{ currentWeather.current.last_updated }}</p>
-    <p>Humidity: {{ currentWeather.current.humidity }}%</p>
-    <p>Wind: {{ currentWeather.current.wind_kph }} km/h</p>
+<div *ngIf="currentWeather" class="weather-card" [ngClass]="'weather-card--' + weatherTheme">
+  <div class="weather-card__header">
+    <div class="header__location">
+      <h2 class="location__name">{{ currentWeather.location.name }}</h2>
+      <p class="location__country">{{ currentWeather.location.country }}</p>
+    </div>
+    
+    <div class="header__time">
+      <div class="time__current">
+        <span class="time__value">{{ formatLocalTime() }}</span>
+        <span class="time__period">{{ getTimeOfDay() }}</span>
+      </div>
+      <p class="time__date">{{ formatLocalDate() }}</p>
+    </div>
   </div>
+
+  <div class="weather-card__main">
+    <div class="main__temperature">
+      <span class="temperature__value">{{ currentWeather.current.temp_c }}°</span>
+      <span class="temperature__unit">C</span>
+    </div>
+    
+    <div class="main__condition">
+      <img 
+        [src]="currentWeather.current.condition.icon" 
+        [alt]="currentWeather.current.condition.text"
+        class="condition__icon">
+      <p class="condition__text">{{ currentWeather.current.condition.text }}</p>
+    </div>
+  </div>
+
+  <div class="weather-card__details">
+    <div class="details__grid">
+      <div class="detail-item">
+        <span class="detail-label">Feels Like</span>
+        <span class="detail-value">{{ currentWeather.current.feelslike_c }}°C</span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Humidity</span>
+        <span class="detail-value">{{ currentWeather.current.humidity }}%</span>
+      </div>
+      
+      <div class="detail-item">
+        <span class="detail-label">Wind</span>
+        <span class="detail-value">{{ currentWeather.current.wind_kph }} km/h</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="weather-card__footer">
+    <div class="footer__info">
+      <p class="last-updated">Last updated: {{ currentWeather.current.last_updated | date:'shortTime' }}</p>
+      <p class="timezone-info" *ngIf="timezone">Timezone: {{ timezone }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="!currentWeather" class="weather-card weather-card--loading">
+  <div class="loading-spinner"></div>
+  <p>Loading weather data...</p>
+</div>
   

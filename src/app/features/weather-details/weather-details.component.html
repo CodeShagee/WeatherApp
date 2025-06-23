@@ -1,0 +1,213 @@
+<div *ngIf="currentWeather" class="weather-details" [ngClass]="'weather-details--' + weatherTheme">
+  <div class="weather-details__header">
+    <h2 class="details__title">Detailed Weather Information</h2>
+    <p class="details__subtitle">Comprehensive weather data for {{ currentWeather.location.name }}</p>
+  </div>
+
+  <div class="weather-details__content">
+    <!-- Location Information -->
+    <div class="details__section">
+      <h3 class="section__title">Location Details</h3>
+      <div class="section__grid">
+        <div class="detail-card">
+          <div class="detail-card__icon">📍</div>
+          <div class="detail-card__content">
+            <span class="detail-label">City</span>
+            <span class="detail-value">{{ currentWeather.location.name }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🏛️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Region</span>
+            <span class="detail-value">{{ currentWeather.location.region }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🌍</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Country</span>
+            <span class="detail-value">{{ currentWeather.location.country }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">📡</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Coordinates</span>
+            <span class="detail-value">{{ currentWeather.location.lat }}, {{ currentWeather.location.lon }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperature Information -->
+    <div class="details__section">
+      <h3 class="section__title">Temperature Details</h3>
+      <div class="section__grid">
+        <div class="detail-card">
+          <div class="detail-card__icon">🌡️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Current Temperature</span>
+            <span class="detail-value">{{ currentWeather.current.temp_c }}°C / {{ currentWeather.current.temp_f }}°F</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🤔</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Feels Like</span>
+            <span class="detail-value">{{ currentWeather.current.feelslike_c }}°C / {{ currentWeather.current.feelslike_f }}°F</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">❄️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Wind Chill</span>
+            <span class="detail-value">{{ formatWindChill(currentWeather.current.windchill_c) }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🔥</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Heat Index</span>
+            <span class="detail-value">{{ formatHeatIndex(currentWeather.current.heatindex_c) }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">💧</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Dew Point</span>
+            <span class="detail-value">{{ formatDewPoint(currentWeather.current.dewpoint_c) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wind Information -->
+    <div class="details__section">
+      <h3 class="section__title">Wind & Pressure</h3>
+      <div class="section__grid">
+        <div class="detail-card">
+          <div class="detail-card__icon">💨</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Wind Speed</span>
+            <span class="detail-value">{{ currentWeather.current.wind_kph }} km/h / {{ currentWeather.current.wind_mph }} mph</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🧭</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Wind Direction</span>
+            <span class="detail-value">{{ currentWeather.current.wind_dir }} ({{ currentWeather.current.wind_degree }}°)</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">💨💨</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Wind Gust</span>
+            <span class="detail-value">{{ currentWeather.current.gust_kph }} km/h / {{ currentWeather.current.gust_mph }} mph</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">📊</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Pressure</span>
+            <span class="detail-value">{{ formatPressure(currentWeather.current.pressure_mb) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atmospheric Conditions -->
+    <div class="details__section">
+      <h3 class="section__title">Atmospheric Conditions</h3>
+      <div class="section__grid">
+        <div class="detail-card">
+          <div class="detail-card__icon">💧</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Humidity</span>
+            <span class="detail-value">{{ currentWeather.current.humidity }}%</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">☁️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Cloud Cover</span>
+            <span class="detail-value">{{ formatCloudCover(currentWeather.current.cloud) }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">👁️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Visibility</span>
+            <span class="detail-value">{{ formatVisibility(currentWeather.current.vis_km) }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">🌧️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Precipitation</span>
+            <span class="detail-value">{{ formatPrecipitation(currentWeather.current.precip_mm) }}</span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">☀️</div>
+          <div class="detail-card__content">
+            <span class="detail-label">UV Index</span>
+            <span class="detail-value" [style.color]="getUVColor(currentWeather.current.uv)">
+              {{ currentWeather.current.uv }} ({{ formatUV(currentWeather.current.uv) }})
+            </span>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-card__icon">{{ isDayTime() ? '☀️' : '🌙' }}</div>
+          <div class="detail-card__content">
+            <span class="detail-label">Day/Night</span>
+            <span class="detail-value">{{ isDayTime() ? 'Day' : 'Night' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather Condition -->
+    <div class="details__section">
+      <h3 class="section__title">Current Conditions</h3>
+      <div class="condition__display">
+        <div class="condition__icon">
+          <img 
+            [src]="currentWeather.current.condition.icon" 
+            [alt]="currentWeather.current.condition.text"
+            class="weather-icon">
+        </div>
+        <div class="condition__info">
+          <h4 class="condition__text">{{ currentWeather.current.condition.text }}</h4>
+          <p class="condition__code">Code: {{ currentWeather.current.condition.code }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weather-details__footer">
+    <p class="update-info">Last updated: {{ currentWeather.current.last_updated | date:'medium' }}</p>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="!currentWeather" class="weather-details weather-details--loading">
+  <div class="loading-spinner"></div>
+  <p>Loading detailed weather information...</p>
+</div> 

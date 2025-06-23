@@ -2,12 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WeatherApp</title>
+  <title>Weather App - Real-time Weather Updates</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Get real-time weather updates with beautiful, modern interface. Check current weather and hourly forecasts for any city.">
+  <meta name="keywords" content="weather, forecast, temperature, humidity, wind, weather app">
+  <meta name="author" content="Weather App">
+  <meta name="theme-color" content="#667eea">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-domain.com/">
+  <meta property="og:title" content="Weather App - Real-time Weather Updates">
+  <meta property="og:description" content="Get real-time weather updates with beautiful, modern interface. Check current weather and hourly forecasts for any city.">
+  <meta property="og:image" content="https://your-domain.com/assets/weather-app-preview.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://your-domain.com/">
+  <meta property="twitter:title" content="Weather App - Real-time Weather Updates">
+  <meta property="twitter:description" content="Get real-time weather updates with beautiful, modern interface. Check current weather and hourly forecasts for any city.">
+  <meta property="twitter:image" content="https://your-domain.com/assets/weather-app-preview.jpg">
+  
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/weather-icons.svg" as="image" type="image/svg+xml">
+  
+  <!-- Performance optimizations -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  
+  <!-- PWA support -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Weather App">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <!-- Loading fallback -->
+    <div class="app-loading">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading Weather App...</div>
+    </div>
+  </app-root>
 </body>
 </html>

@@ -1,0 +1,59 @@
+<div *ngIf="hourlyWeather.length > 0" class="hourly-weather" [ngClass]="'hourly-weather--' + weatherTheme">
+  <div class="hourly-weather__header">
+    <h2 class="hourly-weather__title">24-Hour Forecast</h2>
+    <p class="hourly-weather__subtitle">Hourly weather updates for {{ city }}</p>
+  </div>
+
+  <div class="hourly-weather__container">
+    <div class="hourly-weather__scroll">
+      <div class="hourly-weather__list">
+        <div 
+          *ngFor="let hour of hourlyWeather; trackBy: trackByHour" 
+          class="hourly-item"
+          [ngClass]="{'hourly-item--current': isCurrentHour(hour.time)}"
+        >
+          <div class="hourly-item__time">
+            <span class="time__hour">{{ formatTime(hour.time) }}</span>
+            <span class="time__period">{{ getTimePeriod(hour.time) }}</span>
+          </div>
+
+          <div class="hourly-item__icon">
+            <img 
+              [src]="hour.condition.icon" 
+              [alt]="hour.condition.text"
+              class="weather-icon">
+          </div>
+
+          <div class="hourly-item__temp">
+            <span class="temp__value">{{ hour.temp_c }}°</span>
+          </div>
+
+          <div class="hourly-item__details">
+            <div class="detail-row">
+              <span class="detail-label">Humidity</span>
+              <span class="detail-value">{{ hour.humidity }}%</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Wind</span>
+              <span class="detail-value">{{ hour.wind_kph }} km/h</span>
+            </div>
+          </div>
+
+          <div class="hourly-item__condition">
+            <span class="condition__text">{{ hour.condition.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hourly-weather__footer">
+    <p class="update-info">Forecast updates every hour</p>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="hourlyWeather.length === 0" class="hourly-weather hourly-weather--loading">
+  <div class="loading-spinner"></div>
+  <p>Loading hourly forecast...</p>
+</div> 
