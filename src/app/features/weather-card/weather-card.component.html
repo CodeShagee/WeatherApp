@@ -1,0 +1,12 @@
+
+<div *ngIf="currentWeather" class="weather-card">
+    <h2>Weather in {{ currentWeather.location.name }}</h2>
+    <p>Temperature: {{ currentWeather.current.temp_c }} °C</p>
+    <p>Condition: {{ currentWeather.current.condition.text }}</p> 
+    <img [src]="currentWeather.current.condition.icon" alt="Weather Icon">
+    <p>Feels Like: {{ currentWeather.current.feelslike_c }} °C</p>
+    <p>Last Updated: {{ currentWeather.current.last_updated }}</p>
+    <p>Humidity: {{ currentWeather.current.humidity }}%</p>
+    <p>Wind: {{ currentWeather.current.wind_kph }} km/h</p>
+  </div>
+  
